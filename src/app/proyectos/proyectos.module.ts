@@ -7,6 +7,7 @@ import { ProyectoPageComponent } from './pages/proyecto-page/proyecto-page.compo
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
+import { ProyectoCardComponent } from './components/proyecto-card/proyecto-card.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { NewPageComponent } from './pages/new-page/new-page.component';
     ProyectoPageComponent,
     LayoutPageComponent,
     ListPageComponent,
-    NewPageComponent
+    NewPageComponent,
+    ProyectoCardComponent
   ],
   imports: [
     CommonModule,

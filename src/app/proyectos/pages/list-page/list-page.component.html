@@ -1,7 +1,8 @@
-<ul>
-  <li *ngFor="let proyecto of proyectos">
-    ID : {{proyecto.id}} <br>
-    TITULO: {{proyecto.name}} <br>
-    DESCRIPCION: {{proyecto.website}}
-  </li>
-</ul>
+<h1 class="text-center">Proyectos</h1>
+<mat-divider></mat-divider>
+
+<div class="grid mb-8 pt-2">
+  <div *ngFor="let proyecto of proyectos" class="col-12 sm:col-4 md:col-3 xl:col-2">
+    <app-proyecto-card [proyecto]="proyecto"></app-proyecto-card>
+  </div>
+</div>

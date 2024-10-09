@@ -1,1 +1,7 @@
-<p>list-page works!</p>
+<ul>
+  <li *ngFor="let proyecto of proyectos">
+    ID : {{proyecto.id}} <br>
+    TITULO: {{proyecto.name}} <br>
+    DESCRIPCION: {{proyecto.website}}
+  </li>
+</ul>

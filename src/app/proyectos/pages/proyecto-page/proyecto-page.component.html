@@ -1,1 +1,36 @@
-<p>proyecto-page works!</p>
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<div *ngIf="proyecto; else divLoading" class="grid">
+  <mat-card class="col-12 sm:col-6">
+    <!-- <mat-chip>{{proyecto.id}}</mat-chip> -->
+    <mat-card-title>{{proyecto.name}}</mat-card-title>
+    <mat-card-subtitle>{{proyecto.website}}</mat-card-subtitle>
+    <!-- <button mat-button mat-raised [routerLink]="['/proyectos/list']">Regresar</button> -->
+    <button mat-button mat-raised color="primary" [routerLink]="['/proyectos/list']">
+      <mat-icon>back</mat-icon>Regresar
+    </button>
+  </mat-card>
+
+  <mat-card class="col-2 sm:col-6">
+    <mat-card-title>Tareas</mat-card-title>
+    <mat-divider></mat-divider>
+    <div *ngFor="let tarea of tareas">
+      <mat-card class="shadow-2 mb-3 rounded">
+        <mat-card-header>
+          <mat-card-title># {{tarea.id}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Título:</strong> {{tarea.title}}</p>
+          <p><strong>Estado:</strong> {{tarea.completed ? 'Completada' : 'No Completada'}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </mat-card>
+</div>

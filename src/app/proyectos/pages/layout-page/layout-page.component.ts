@@ -9,7 +9,8 @@ export class LayoutPageComponent {
 
   public sidebarItems = [
     {label: 'Listado', icon: 'label', url: './list'},
-    {label: 'Nuevo', icon: 'add', url: './new-project'},
+    {label: 'Crear Proyecto', icon: 'create_new_folder', url: './new-project'},
+    {label: 'Crear Tarea', icon: 'task', url: './new-project'},
   ]
 
 }

@@ -13,9 +13,12 @@ export class ListPageComponent implements OnInit {
 
   constructor(private proyectosServices: ProyectosService) { }
   ngOnInit(): void {
-    this.proyectosServices.getProyectos().subscribe(proyectos => this.proyectos = proyectos);
+    this.proyectosServices.getProyectos()
+    .subscribe(
+      proyectos => {
+        this.proyectos = proyectos
+        // console.log(this.proyectos)
+      }
+    );
   }
-
-
-
 }

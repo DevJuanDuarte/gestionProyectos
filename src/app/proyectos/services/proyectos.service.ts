@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Proyecto } from '../interfaces/proyecto.interface';
 import { environments } from 'src/app/environments/environments.prod';
 
@@ -13,6 +13,13 @@ export class ProyectosService {
 
   getProyectos(): Observable<Proyecto[]> {
     return this.httpClient.get<Proyecto[]>(`${this.baseUrl}/users`);
+  }
+
+  getProyectoById(id: string): Observable<Proyecto | undefined> {
+    return this.httpClient.get<Proyecto>(`${this.baseUrl}/users/${id}`)
+      .pipe(
+        catchError(error => of(undefined))
+      )
   }
 
 }

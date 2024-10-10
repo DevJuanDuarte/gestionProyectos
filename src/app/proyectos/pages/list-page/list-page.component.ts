@@ -17,7 +17,7 @@ export class ListPageComponent implements OnInit {
     .subscribe(
       proyectos => {
         this.proyectos = proyectos
-        // console.log(this.proyectos)
+        console.log(this.proyectos)
       }
     );
   }

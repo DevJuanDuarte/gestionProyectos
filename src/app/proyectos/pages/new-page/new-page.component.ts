@@ -4,6 +4,9 @@ import { ProyectosService } from '../../services/proyectos.service';
 import { Proyecto } from '../../interfaces/proyecto.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-new-page',
@@ -16,7 +19,7 @@ export class NewPageComponent implements OnInit {
     id: new FormControl<number | string | null>(null),
     name: new FormControl<string>('', { nonNullable: true }),
     email: new FormControl<string | null>(null),
-    // address: new FormControl<string | null>(null),
+    address: new FormControl<string | null>(null),
     phone: new FormControl<string | null>(null),
     website: new FormControl<string | null>(null),
   });
@@ -25,6 +28,8 @@ export class NewPageComponent implements OnInit {
     private proyectosService: ProyectosService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +74,7 @@ export class NewPageComponent implements OnInit {
         .subscribe(proyecto => {
           // Mostrar snack de registro actualizado
           this.router.navigate(['/proyectos/list']);
+          this.showSnackBar(`Proyecto ${this.actualProyecto.name} actualizado correctamente.`);
         });
       return;
     }
@@ -77,6 +83,30 @@ export class NewPageComponent implements OnInit {
       .subscribe(proyecto => {
         // Mostrar snack y redirigir
         this.router.navigate(['/proyectos/list']);
+        this.showSnackBar(`Proyecto ${this.actualProyecto.name} agregado correctamente.`);
       });
+  }
+
+  onDelProject() {
+    if (!this.actualProyecto.id) throw Error('El proyecto es requerido');
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: this.proyectoForm.value,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      // console.log('eliminado');
+      this.proyectosService.deleteProyecto(this.actualProyecto.id).subscribe(() => {
+        this.router.navigate(['/proyectos/list']);
+        this.showSnackBar(`Proyecto ${this.actualProyecto.name} eliminado correctamente.`);
+      });
+    });
+  }
+
+  showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+    });
   }
 }

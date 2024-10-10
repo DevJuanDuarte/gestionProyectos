@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Esta seguro que desea eliminar el registro?</h1>
+<div mat-dialog-content>
+  <p>Este proceso no es reversible.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <span class="spacer"></span>
+  <button mat-button (click)="onConfirm()" color="warn" cdkFocusInitial>Borrar</button>
+</div>

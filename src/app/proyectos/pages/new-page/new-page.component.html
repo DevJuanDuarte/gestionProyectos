@@ -1,4 +1,4 @@
-<h1>Agregar / Editar Proyecto</h1>
+<h1>{{actualProyecto.id ? 'Editar' : 'Crear'}} Proyecto</h1>
 
 <mat-divider class="mb-2"></mat-divider>
 
@@ -30,7 +30,7 @@
         </form>
 
         <div class="flex justify-contentr-between">
-          <button mat-flat-button color="warn">Borrar</button>
+          <button *ngIf="actualProyecto.id" (click)="onDelProject()" mat-flat-button color="warn">Borrar</button>
           <span class="spacer"></span>
           <button (click)="onSubmit()" mat-flat-button color="primary"><mat-icon>save</mat-icon>Guardar</button>
         </div>

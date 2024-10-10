@@ -95,5 +95,29 @@ export class ProyectosService {
     }
     this.saveLocalProjects(localProyectos);
   }
+
+
+
+  deleteProyecto(id: number): Observable<void> {
+    const localProyectos = this.getLocalProjects();
+    const index = localProyectos.findIndex(p => p.id === id);
+    if (index !== -1) {
+      localProyectos.splice(index, 1);
+      this.saveLocalProjects(localProyectos);
+      console.log('Desde local eliminando');
+      return of();
+    } else {
+      return this.httpClient.delete<void>(`${this.baseUrl}/users/${id}`)
+        .pipe(
+          map(() => {
+            console.log('Desde placeholder eliminando');
+          }),
+          catchError(err => {
+            console.error('Error al eliminar el proyecto de JSONPlaceholder', err);
+            return of();
+          })
+        );
+    }
+  }
   
 }

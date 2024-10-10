@@ -9,6 +9,7 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { ProyectoCardComponent } from './components/proyecto-card/proyecto-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LayoutPageComponent,
     ListPageComponent,
     NewPageComponent,
-    ProyectoCardComponent
+    ProyectoCardComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

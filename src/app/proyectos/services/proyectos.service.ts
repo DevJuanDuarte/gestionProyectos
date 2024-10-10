@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Proyecto } from '../interfaces/proyecto.interface';
 import { environments } from 'src/app/environments/environments.prod';
 
@@ -19,6 +19,25 @@ export class ProyectosService {
     return this.httpClient.get<Proyecto>(`${this.baseUrl}/users/${id}`)
       .pipe(
         catchError(error => of(undefined))
+      )
+  }
+
+  addProyecto(proyecto: Proyecto): Observable<Proyecto> {
+    return this.httpClient.post<Proyecto>(`${this.baseUrl}/users`, proyecto);
+
+  }
+
+  updateProyecto(proyecto: Proyecto): Observable<Proyecto> {
+    if(!proyecto.id) throw Error('El proyecto es requerido');
+    return this.httpClient.patch<Proyecto>(`${this.baseUrl}/users/${proyecto.id}`, proyecto);
+
+  }
+
+  deleteProyectoById(id:string): Observable<boolean> {
+    return this.httpClient.delete(`${this.baseUrl}/users/${id}`)
+     .pipe(
+        catchError(err => of(false)),
+        map(resp => true)
       )
   }
 

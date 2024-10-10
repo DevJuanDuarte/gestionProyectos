@@ -11,14 +11,20 @@ export class ListPageComponent implements OnInit {
 
   public proyectos: Proyecto[] = [];
 
-  constructor(private proyectosServices: ProyectosService) { }
+  constructor(private proyectosService: ProyectosService) { }
+
   ngOnInit(): void {
-    this.proyectosServices.getProyectos()
-    .subscribe(
-      proyectos => {
-        this.proyectos = proyectos
-        console.log(this.proyectos)
-      }
-    );
+    this.loadProjects();
+  }
+
+  loadProjects(): void {
+    this.proyectosService.getProyectos()
+      .subscribe(
+        proyectos => {
+          this.proyectos = proyectos;
+          // Actualizar la consola con el array completo de proyectos
+          console.log(this.proyectos);
+        }
+      );
   }
 }

@@ -7,32 +7,32 @@
     <mat-card>
       <mat-card-content>
 
-        <div class="grid">
+        <form class="grid" [formGroup]="proyectoForm" (ngSubmit)="onSubmit()">
           <mat-form-field class="col-12">
             <mat-label>Nombre del proyecto</mat-label>
-            <input type="text" matInput required>
+            <input type="text" matInput required formControlName="name">
           </mat-form-field>
 
           <mat-form-field class="col-12">
             <mat-label>Email del proyecto</mat-label>
-            <input type="email" matInput>
+            <input type="email" matInput formControlName="email">
           </mat-form-field>
 
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Dirección del proyecto</mat-label>
-            <input type="text" matInput>
+            <input type="text" matInput formControlName="address">
           </mat-form-field>
 
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Telefono del proyecto</mat-label>
-            <input type="text" matInput>
+            <input type="text" matInput formControlName="phone">
           </mat-form-field>
-        </div>
+        </form>
 
         <div class="flex justify-contentr-between">
           <button mat-flat-button color="warn">Borrar</button>
           <span class="spacer"></span>
-          <button mat-flat-button color="primary"><mat-icon>save</mat-icon>Guardar</button>
+          <button (click)="onSubmit()" mat-flat-button color="primary"><mat-icon>save</mat-icon>Guardar</button>
         </div>
 
       </mat-card-content>

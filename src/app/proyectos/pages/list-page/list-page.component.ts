@@ -23,7 +23,7 @@ export class ListPageComponent implements OnInit {
         proyectos => {
           this.proyectos = proyectos;
           // Actualizar la consola con el array completo de proyectos
-          console.log(this.proyectos);
+          // console.log(this.proyectos);
         }
       );
   }

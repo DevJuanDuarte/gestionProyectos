@@ -18,6 +18,12 @@ const routes: Routes = [
     canMatch: [AuthGuard]
   },
   {
+    path: 'tareas',
+    loadChildren: () => import('./tareas/tareas.module').then(m => m.TareasModule),
+    canActivate: [AuthGuard],
+    canMatch: [AuthGuard]
+  },
+  {
     path: '404',
     component: Error404PageComponent
   },

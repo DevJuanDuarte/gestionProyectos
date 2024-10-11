@@ -2,12 +2,12 @@
   <span class="text-lg mb-4 text-center">Login</span>
   <mat-form-field>
     <mat-label>Usuario</mat-label>
-    <input type="text" matInput placeholder="Nombre de usuario">
+    <input type="text" matInput required placeholder="Nombre de usuario">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Contraseña</mat-label>
-    <input type="password" matInput placeholder="Contraseña">
+    <input type="password" matInput required placeholder="Contraseña">
   </mat-form-field>
 
   <button (click)="onLogin()" mat-button mat-flat-button color="primary">

@@ -1,6 +1,10 @@
 <h1 class="text-center">Proyectos</h1>
 <mat-divider></mat-divider>
 
+<div class="flex justify-content-center mb4">
+  <button mat-button [routerLink]="['/proyectos/new-project']" color="primary">Agregar Proyecto</button>
+</div>
+
 <div class="grid mb-8 pt-2">
   <div *ngFor="let proyecto of proyectos" class="col-12 sm:col-4 md:col-3 xl:col-3">
     <app-proyecto-card [proyecto]="proyecto"></app-proyecto-card>

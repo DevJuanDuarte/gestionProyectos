@@ -1,48 +1,45 @@
-<h1>{{actualProyecto.id ? 'Editar' : 'Crear'}} Proyecto</h1>
-
-<mat-divider class="mb-2"></mat-divider>
-
-<div class="grid">
-  <div class="col-12 sm:col-6">
-    <mat-card>
+<div class="flex justify-content-center align-items-center mt-4 flex-column">
+  <form [formGroup]="proyectoForm" (ngSubmit)="onSubmit()" class="w-50">
+    <mat-card class="p-2">
+      <h1 class="text-center">{{actualProyecto.id ? 'Editar' : 'Crear'}} Proyecto</h1>
+      <mat-divider class="mb-2"></mat-divider>
       <mat-card-content>
-
-        <form class="grid" [formGroup]="proyectoForm" (ngSubmit)="onSubmit()">
-          <mat-form-field class="col-12">
-            <mat-label>Nombre del proyecto</mat-label>
-            <input type="text" matInput required formControlName="name">
-          </mat-form-field>
-
-          <mat-form-field class="col-12">
-            <mat-label>Email del proyecto</mat-label>
-            <input type="email" matInput formControlName="email">
-          </mat-form-field>
-
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>Pagina del proyecto</mat-label>
-            <input type="text" matInput formControlName="website">
-          </mat-form-field>
-
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>Telefono del proyecto</mat-label>
-            <input type="text" matInput formControlName="phone">
-          </mat-form-field>
-        </form>
-
-        <div class="flex justify-contentr-between">
-          <button *ngIf="actualProyecto.id" (click)="onDelProject()" mat-flat-button color="warn">Borrar</button>
-          <span class="spacer"></span>
-          <button (click)="onSubmit()" mat-flat-button color="primary"><mat-icon>save</mat-icon>Guardar</button>
+        <div class="grid">
+          <div class="col-12">
+            <mat-form-field class="col-12">
+              <mat-label>Nombre del proyecto</mat-label>
+              <input type="text" matInput required formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <mat-form-field class="col-12">
+              <mat-label>Email del proyecto</mat-label>
+              <input type="email" matInput formControlName="email">
+            </mat-form-field>
+          </div>
+          <div class="col-12 sm:col-6">
+            <mat-form-field class="col-12">
+              <mat-label>Pagina del proyecto</mat-label>
+              <input type="text" matInput formControlName="website">
+            </mat-form-field>
+          </div>
+          <div class="col-12 sm:col-6">
+            <mat-form-field class="col-12">
+              <mat-label>Telefono del proyecto</mat-label>
+              <input type="text" matInput formControlName="phone">
+            </mat-form-field>
+          </div>
         </div>
-
       </mat-card-content>
     </mat-card>
+  </form>
+
+  <div class="flex justify-content-center mt-2">
+    <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" class="mr-2">
+      <mat-icon>save</mat-icon>Guardar
+    </button>
+    <button *ngIf="actualProyecto.id" mat-flat-button color="warn" (click)="onDelProject()">
+      Borrar
+    </button>
   </div>
-
-  <div class="col-12 sm:col-6"></div>
 </div>
-
-
-<!-- <pre>
-{{actualProyecto | json}}
-</pre> -->

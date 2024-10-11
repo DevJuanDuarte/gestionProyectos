@@ -15,15 +15,15 @@ export class LayoutPageComponent {
     private router: Router
 
   ) {
-    
+
   }
 
-  onLogOut(){
+  onLogOut() {
     this.authService.logOut();
     this.router.navigate(['/auth/login']);
   }
 
-  get user(): User | undefined{
+  get user(): User | undefined {
     return this.authService.currentUser;
   }
 
@@ -31,9 +31,11 @@ export class LayoutPageComponent {
 
 
   public sidebarItems = [
-    {label: 'Listado', icon: 'label', url: './list'},
-    {label: 'Crear Proyecto', icon: 'create_new_folder', url: './new-project'},
-    {label: 'Crear Tarea', icon: 'task', url: './new-project'},
-  ]
+    { label: 'Proyectos', icon: 'label', url: '/proyectos/list' },
+    { label: 'Tareas', icon: 'library_books', url: '/tareas/list' }, // Ruta correcta para listar tareas
+    // { label: 'Crear Proyecto', icon: 'create_new_folder', url: '/proyectos/new-project' },
+    // { label: 'Crear Tarea', icon: 'task', url: '/tareas/new-task' }, // Ruta correcta para crear tarea
+  ];
+
 
 }

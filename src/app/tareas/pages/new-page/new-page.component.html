@@ -1,0 +1,58 @@
+<!-- <div class="flex justify-content-center">
+  <form [formGroup]="tareaForm" (ngSubmit)="onSubmit()">
+    <mat-card class="col-12">
+      <h1 class="text-center">{{ actualTarea.id ? 'Editar' : 'Crear' }} Tarea</h1>
+      <mat-form-field>
+        <mat-label>Título de la tarea</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+  
+      <section class="example-section">
+        <label class="example-margin">Estado:</label>
+        <mat-radio-group formControlName="completed">
+          <mat-radio-button class="example-margin" [value]="true">Completada</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="false">No Completada</mat-radio-button>
+        </mat-radio-group>
+      </section>
+  
+      
+    </mat-card>
+  </form>
+  <div >
+    <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()">
+      Guardar
+    </button>
+    <button *ngIf="actualTarea.id" mat-raised-button color="warn" (click)="onDelete()">
+      Eliminar
+    </button>
+  </div>
+</div> -->
+
+<div class="flex justify-content-center align-items-center mt-4 flex-column">
+  <form [formGroup]="tareaForm" (ngSubmit)="onSubmit()" class="w-5">
+    <mat-card class="p-2">
+      <h1 class="text-center">{{ actualTarea.id ? 'Editar' : 'Crear' }} Tarea</h1>
+      <mat-form-field class="w-100">
+        <mat-label>Título de la tarea</mat-label>
+        <input type="text" matInput required formControlName="title" >
+      </mat-form-field>
+
+      <section class="example-section">
+        <label class="example-margin">Estado:</label>
+        <mat-radio-group formControlName="completed">
+          <mat-radio-button class="example-margin" [value]="true">Completada</mat-radio-button>
+          <mat-radio-button class="example-margin" [value]="false">No Completada</mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </mat-card>
+  </form>
+
+  <div class="flex justify-content-center mt-2">
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" class="mr-2">
+      Guardar
+    </button>
+    <button *ngIf="actualTarea.id" mat-raised-button color="warn" (click)="onDelete()">
+      Eliminar
+    </button>
+  </div>
+</div>

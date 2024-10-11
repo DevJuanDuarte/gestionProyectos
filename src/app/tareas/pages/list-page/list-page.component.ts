@@ -11,38 +11,31 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class ListPageComponent implements OnInit, AfterViewInit {
 
+  //Paginador
   public dataSource = new MatTableDataSource<Tarea>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  displayedColumns: string[] = ['id', 'title', 'completed', 'actions'];
-
-  constructor(private tareasService: TareasService) { }
-
-  ngOnInit(): void {
-    this.loadTasks();
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
+  //Columnas a mostrar en la tabla
+  displayedColumns: string[] = ['id', 'title', 'completed', 'actions'];
+
+
+  constructor(private tareasService: TareasService) { }
+
+  ngOnInit(): void {
+    //Carga las tareas desde el inicio
+    this.loadTasks();
+  }
+
+ 
+  //Metodo para cargar las tareas
   loadTasks(): void {
     this.tareasService.getTareas()
       .subscribe(tareas => {
         this.dataSource.data = tareas;
         console.log(this.dataSource.data);
-      });
-  }
-
-  editTask(tarea: Tarea): void {
-    // Implement your edit logic here
-    console.log('Editar tarea:', tarea);
-  }
-
-  deleteTask(id: number): void {
-    this.tareasService.deleteTarea(id)
-      .subscribe(() => {
-        this.loadTasks();
       });
   }
 }

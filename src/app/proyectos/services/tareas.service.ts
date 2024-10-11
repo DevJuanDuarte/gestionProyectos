@@ -24,22 +24,8 @@ export class TareasService {
     localStorage.setItem(this.localStorageKey, JSON.stringify(tareas));
   }
 
-  // Obtener todas las tareas (incluyendo locales)
-  // getTareas(): Observable<Tarea[]> {
-  //   const localTareas = this.getLocalTareas();
-  //   return this.httpClient.get<Tarea[]>(`${this.baseUrl}/todos`).pipe(
-  //     map(tareas => {
-  //       // Filtrar las tareas locales para que no se dupliquen con las de JSONPlaceholder
-  //       const updatedTareas = tareas.map(tarea => {
-  //         const localTarea = localTareas.find(t => t.id === tarea.id);
-  //         return localTarea ? localTarea : tarea;
-  //       });
-  //       // Incluir solo las tareas locales que no están en JSONPlaceholder
-  //       return [...updatedTareas, ...localTareas.filter(t => t.id > 200)];
-  //     })
-  //   );
-  // }
 
+  // Metodo para obtener las tareas en localStorage y en jsonplaceholder
   getTareas(): Observable<Tarea[]> {
     const localTareas = this.getLocalTareas();
     return this.httpClient.get<Tarea[]>(`${this.baseUrl}/todos`).pipe(
@@ -49,7 +35,7 @@ export class TareasService {
           return localTarea ? localTarea : tarea;
         });
         
-        return [...updatedTareas, ...localTareas.filter(t => t.id > 200)].reverse();
+        return [...updatedTareas, ...localTareas.filter(t => t.id > 200)].reverse(); //Los muestra de manera descendente
       })
     );
   }

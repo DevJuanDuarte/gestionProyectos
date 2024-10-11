@@ -3,18 +3,21 @@ import { ActivatedRouteSnapshot, CanActivate, CanMatch, Route, UrlSegment, Route
 import { Observable, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
-@Injectable({providedIn: 'root'})
-export class AuthGuard implements CanMatch, CanActivate{
+//Guard para autenticacion
+@Injectable({ providedIn: 'root' })
+export class AuthGuard implements CanMatch, CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
 
+  //Metodo para validar la autenticacion
   private checkAuthStatus(): boolean | Observable<boolean> {
     return this.authService.checkAutenticacion()
       .pipe(
-        tap( isAutenticado => {
-          if(!isAutenticado) {
+        tap(isAutenticado => {
+          if (!isAutenticado) {
+            //Si no esta autenticado lo redirije al login
             this.router.navigate(['/auth/login']);
           }
         })
@@ -34,5 +37,5 @@ export class AuthGuard implements CanMatch, CanActivate{
     return this.checkAuthStatus();
 
   }
-  
+
 }

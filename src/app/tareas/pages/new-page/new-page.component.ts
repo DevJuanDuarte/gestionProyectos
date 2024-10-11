@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class NewPageComponent implements OnInit {
 
+  //Props para el formulario de tareas
   public tareaForm = new FormGroup({
     id: new FormControl<number | null>(null),
     title: new FormControl<string>('', { nonNullable: true }),
@@ -39,7 +40,7 @@ export class NewPageComponent implements OnInit {
       ).subscribe(tarea => {
         if (!tarea) {
           this.router.navigateByUrl('/tareas/list');
-          return; // Asegúrate de salir del flujo si la tarea no existe
+          return;
         }
 
         this.tareaForm.reset({
@@ -49,6 +50,7 @@ export class NewPageComponent implements OnInit {
       });
   }
 
+  //Getter para obtener la tarea actual
   get actualTarea(): Tarea {
     const formValue = this.tareaForm.value;
     return {
@@ -59,6 +61,8 @@ export class NewPageComponent implements OnInit {
     };
   }
 
+
+  //Metodo para insertar o actualizar una tarea
   onSubmit(): void {
     if (this.tareaForm.invalid) return;
 
@@ -78,16 +82,7 @@ export class NewPageComponent implements OnInit {
       });
   }
 
-  // onDelete(): void {
-  //   if (!this.actualTarea.id) return;
-
-  //   this.tareasService.deleteTarea(this.actualTarea.id)
-  //     .subscribe(() => {
-  //       this.router.navigate(['/tareas/list']);
-  //       this.showSnackBar(`Tarea ${this.actualTarea.title} eliminada correctamente.`);
-  //     });
-  // }
-
+  //Metodo para eliminar una tarea
   onDelete() {
     if (!this.actualTarea.id) throw Error('La tarea es requerida');
 
@@ -105,7 +100,8 @@ export class NewPageComponent implements OnInit {
     });
   }
 
+  //Mensaje de notificacion
   showSnackBar(message: string): void {
-    this.snackBar.open(message, 'Cerrar', { duration: 3000 });
+    this.snackBar.open(message, 'Cerrar', { duration: 2500 });
   }
 }

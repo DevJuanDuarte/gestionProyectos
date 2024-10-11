@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanMatch, Route, UrlSegment, Route
 import { map, Observable, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
+//Guard para validar si ya se encuentra logueado no pueda volver al login
 @Injectable({ providedIn: 'root' })
 export class PublicGuard implements CanMatch, CanActivate {
   constructor(
@@ -18,20 +19,14 @@ export class PublicGuard implements CanMatch, CanActivate {
             this.router.navigate(['./']);
           }
         }),
-        map( isAutenticado => !isAutenticado)
+        map(isAutenticado => !isAutenticado)
       )
   }
 
   canMatch(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> {
-    // console.log('Can match');
-    // console.log({route, segments});
-    // return true;
     return this.checkAuthStatus();
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // console.log('Can activate');
-    // console.log({route, state});
-    // return true;
     return this.checkAuthStatus();
 
   }

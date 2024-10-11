@@ -5,7 +5,7 @@ import { NewPageComponent } from './pages/new-page/new-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { ProyectoPageComponent } from './pages/proyecto-page/proyecto-page.component';
 
-//localhost:4200/proyectos
+// Rutas proyectos
 const routes: Routes = [
   {
     path: '',

@@ -4,6 +4,8 @@ import { LayoutPageComponent } from '../proyectos/pages/layout-page/layout-page.
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 
+
+// Rutas de tareas
 const routes: Routes = [
   {
     path: '',

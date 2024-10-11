@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Proyecto } from '../interfaces/proyecto.interface';
-import { environments } from 'src/app/environments/environments.prod';
+import { environments } from 'src/app/environments/environments';
 
 @Injectable({ providedIn: 'root' })
 export class ProyectosService {
@@ -12,15 +12,14 @@ export class ProyectosService {
 
   constructor(private httpClient: HttpClient) { }
 
+  //Metodo para obtener los proyectos que se van creando y alacenando en el localStorage
   getLocalProjects(): Proyecto[] {
     const proyectos = localStorage.getItem(this.localStorageKey);
     return proyectos ? JSON.parse(proyectos) : [];
   }
 
-  saveLocalProjects(proyectos: Proyecto[]): void {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(proyectos));
-  }
-
+  
+  //Metodo para obtener los proyectos incluyendo los creados
   getProyectos(): Observable<Proyecto[]> {
     const localProyectos = this.getLocalProjects();
     return this.httpClient.get<Proyecto[]>(`${this.baseUrl}/users`).pipe(
@@ -34,8 +33,8 @@ export class ProyectosService {
       })
     );
   }
-  
 
+  //Metodo para obtener los proyectos locales y los del endpoint por su id 
   getProyectoById(id: string): Observable<Proyecto | undefined> {
     const localProyectos = this.getLocalProjects();
     const localProyecto = localProyectos.find(p => p.id === parseInt(id, 10));
@@ -48,6 +47,11 @@ export class ProyectosService {
       );
   }
 
+  // Metodo para almacenar el proyecto
+  saveLocalProjects(proyectos: Proyecto[]): void {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(proyectos));
+  }
+  // Metodo para agregar un proyecto
   addProyecto(proyecto: Proyecto): Observable<Proyecto> {
     const localProyectos = this.getLocalProjects();
     const ultLocalId = localProyectos.length ? Math.max(...localProyectos.map(p => p.id)) : 0;
@@ -59,6 +63,7 @@ export class ProyectosService {
     return of(newProyecto); // Simula la creación exitosa
   }
 
+  // Metodo para actualizar un proyecto
   updateProyecto(proyecto: Proyecto): Observable<Proyecto> {
     const localProyectos = this.getLocalProjects();
     const index = localProyectos.findIndex(p => p.id === proyecto.id);
@@ -83,7 +88,7 @@ export class ProyectosService {
         );
     }
   }
-  
+
   // Método auxiliar para actualizar el proyecto en Local Storage
   updateLocalProject(updatedProject: Proyecto): void {
     const localProyectos = this.getLocalProjects();
@@ -98,6 +103,8 @@ export class ProyectosService {
 
 
 
+
+  //Metodo para eliminar un proyecto
   deleteProyecto(id: number): Observable<void> {
     const localProyectos = this.getLocalProjects();
     const index = localProyectos.findIndex(p => p.id === id);
@@ -119,5 +126,5 @@ export class ProyectosService {
         );
     }
   }
-  
+
 }
